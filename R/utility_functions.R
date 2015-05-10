@@ -89,14 +89,11 @@ rectify_field_type <- function(d_in, d_fields){
   
   # get integer fields
   int_fields = d_fields[d_fields$type=="int",1]
-  print(int_fields)
   col_names = names(d_in)
   d_int1 = lapply(X = col_names, FUN = function(x, y, z) {if(x %in% y) class(z[, x]) = "numeric"; 
                                                           ret = z[, x]; return(ret)},
                   y = int_fields, z = d_in)
   names(d_int1) = col_names
-  print("sapply result")
-  print(str(d_int1))
   d_out = as.data.frame(d_int1, stringsAsFactors = FALSE)
   
   return(d_out)
@@ -139,21 +136,16 @@ fetch_data <- function(res_id, api_key, filter = NULL, select = NULL, sort = NUL
                              select = select,
                              sort = sort)
     data_stage1 = plyr::ldply(get_data(JSON_list), to_data_frame)
-    print(current_itr)
-    print(is(data_stage1$id))
     return_count = get_count(JSON_list)
     if(current_itr == 0) {
       data_stage2 = data_stage1
       data_field_type = plyr::ldply(get_field_type(JSON_list), to_data_frame)
     }
     else if(return_count > 0) data_stage2 = rbind(data_stage2, data_stage1)
-    print(current_itr)
-    print(is(data_stage2$id))
     current_itr = current_itr + 1  
   }
   
   if(field_type_correction){
-    print("123")
     data_stage3 = rectify_field_type(data_stage2, data_field_type)
   }
   else{
