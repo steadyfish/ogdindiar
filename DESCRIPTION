@@ -14,4 +14,6 @@ Imports:
     plyr (>= 1.8.2)
 URL: https://github.com/steadyfish/ogdindiar
 BugReports: https://github.com/steadyfish/ogdindiar/issues
-Suggests: testthat
+Suggests: testthat,
+    knitr
+VignetteBuilder: knitr

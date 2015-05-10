@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Dhrumin Shah" />
+
+<meta name="date" content="2015-05-10" />
+
+<title>Introduction</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Introduction</h1>
+<h4 class="author"><em>Dhrumin Shah</em></h4>
+<h4 class="date"><em>2015-05-10</em></h4>
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This package provides easy access to the API provided by <a href="https://data.gov.in">Open Government Data Platform - India</a> to download datasets from R. Here’s the list of <a href="https://data.gov.in/catalogs#path=is_api/1">Datasets available through API</a>.</p>
+</div>
+<div id="prerequisite" class="section level2">
+<h2>Prerequisite</h2>
+<p>To use this package to download data from <a href="https://data.gov.in">Open Government Data Platform - India</a>, you’ll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).</p>
+</div>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>This package is currently available on github, you can install the latest development version as follows -</p>
+<pre><code>```r
+devtools::install_github(&quot;steadyfish/ogdindiar&quot;)
+```
+
+```
+## Downloading github repo steadyfish/ogdindiar@master
+## Installing ogdindiar
+## &quot;C:/PROGRA~1/R/R-32~1.0/bin/x64/R&quot; --vanilla CMD INSTALL  \
+##   &quot;C:/Users/DreamerNoob/AppData/Local/Temp/RtmpYljE3l/devtools1aa0b674a8e/steadyfish-ogdindiar-f660c35&quot;  \
+##   --library=&quot;C:/Users/pokerface/R/win-library/3.2&quot; --install-tests 
+## 
+## Reloading installed ogdindiar
+## Welcome to ogdindiar
+```
+
+```r
+library(ogdindiar)
+```</code></pre>
+</div>
+<div id="basic-usage" class="section level2">
+<h2>Basic Usage</h2>
+<p>The main function this package provides is <code>fetch_data()</code>. At minimum, you need to provide 2 arguments to this function.</p>
+<ul>
+<li>res_id: Resource id of the dataset you want to access</li>
+<li>api_key: Your personal API key (See Prerequisite above)</li>
+</ul>
+<p>Resource id for the datasets can be found on the data specific page. For example, this page has the resource id information for <a href="https://data.gov.in/resources/annual-and-seasonal-mean-temperature-india/api">Annual And Seasonal Mean Temperature Of India</a>. The resource id a string that’s part of Datastore API URL.</p>
+<ul>
+<li>The URL for this dataset as shown on the page is - <a href="https://data.gov.in/api/datastore/resource.json?resource_id" class="uri">https://data.gov.in/api/datastore/resource.json?resource_id</a>=<mark>98fe9271-a59d-4834-b05b-fd5ddb94ac01</mark>&amp;api-key=YOURKEY</li>
+<li>The resource id is the highlighted part in the above URL.</li>
+</ul>
+<p>Once you have figured out these 2 parameters you can download that datasets as follows:</p>
+<pre><code>```r
+mean_temp_data = fetch_data(res_id = &quot;98fe9271-a59d-4834-b05b-fd5ddb94ac01&quot;,
+                        api_key = your_api_key)
+```
+
+```
+## [1] &quot;https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&amp;api-key=4a6b520b59fab36f4c78f8bac1a0afcf&amp;offset=0&amp;limit=100&quot;
+## [1] &quot;https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&amp;api-key=4a6b520b59fab36f4c78f8bac1a0afcf&amp;offset=1&amp;limit=100&quot;
+## [1] &quot;https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&amp;api-key=4a6b520b59fab36f4c78f8bac1a0afcf&amp;offset=2&amp;limit=100&quot;
+```</code></pre>
+<p>This function returns a list of 2 elements.</p>
+<ul>
+<li><p>The first element is the data</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mean_temp_data[[<span class="dv">1</span>]])</code></pre>
+<pre><code>##     id  timestamp year annual jan_feb mar_may jun_sep oct_dec
+## 1 1123 1424778424 1957     23      18      25      27      21
+## 2 1423 1424778424 1972     24      18      25      27      21
+## 3 1443 1424778424 1973     24      19      26      27      21
+## 4 1463 1424778424 1974     24      18      26      27      21
+## 5 1483 1424778424 1975     23      18      25      26      21
+## 6 1503 1424778424 1976     24      18      25      26      22</code></pre></li>
+<li><p>The second element is a dataframe containing metadata about the columns.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mean_temp_data[[<span class="dv">2</span>]]</code></pre>
+<pre><code>##         .id   type   size unsigned not null
+## 1        id serial normal     TRUE     TRUE
+## 2 timestamp    int normal     TRUE    FALSE
+## 3      year    int normal     &lt;NA&gt;    FALSE
+## 4    annual    int normal     &lt;NA&gt;    FALSE
+## 5   jan_feb    int normal     &lt;NA&gt;    FALSE
+## 6   mar_may    int normal     &lt;NA&gt;    FALSE
+## 7   jun_sep    int normal     &lt;NA&gt;    FALSE
+## 8   oct_dec    int normal     &lt;NA&gt;    FALSE
+##                        description
+## 1                                 
+## 2 The Unix timestamp for the data.
+## 3                                 
+## 4                                 
+## 5                                 
+## 6                                 
+## 7                                 
+## 8</code></pre></li>
+</ul>
+</div>
+<div id="advanced-usage" class="section level2">
+<h2>Advanced Usage</h2>
+<p>Instead of downloading entire datasets you can conditionally download specific data. These functions are achieved using additional arguments to <code>fetch_data()</code> function. Currently you can use -</p>
+<ul>
+<li><code>filter</code> to filter the dataset using <strong>equality constraints</strong> on specific columns.</li>
+<li><code>select</code> to select specific set of columns to be downloaded.</li>
+<li><code>sort</code> to sort the resulting dataset based on multiple columns.</li>
+</ul>
+<p>Following example illustrates this -</p>
+<pre><code>```r
+mean_temp_25 = fetch_data(res_id = &quot;98fe9271-a59d-4834-b05b-fd5ddb94ac01&quot;,
+                        api_key = your_api_key,
+                        filter = c(&quot;annual&quot; = &quot;25&quot;),
+                        select = c(&quot;year&quot;, &quot;annual&quot;, &quot;jan_feb&quot;, &quot;mar_may&quot;, &quot;jun_sep&quot;, &quot;oct_dec&quot;),
+                        sort = c(&quot;jan_feb&quot; = &quot;asc&quot;, &quot;mar_may&quot; = &quot;desc&quot;)
+                        )
+```
+
+```
+## [1] &quot;https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&amp;api-key=4a6b520b59fab36f4c78f8bac1a0afcf&amp;offset=0&amp;limit=100&amp;filters[annual]=25&amp;fields=year,annual,jan_feb,mar_may,jun_sep,oct_dec&amp;sort[jan_feb]=asc&amp;sort[mar_may]=desc&quot;
+## [1] &quot;https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&amp;api-key=4a6b520b59fab36f4c78f8bac1a0afcf&amp;offset=1&amp;limit=100&amp;filters[annual]=25&amp;fields=year,annual,jan_feb,mar_may,jun_sep,oct_dec&amp;sort[jan_feb]=asc&amp;sort[mar_may]=desc&quot;
+```
+
+
+```r
+head(mean_temp_25[[1]])
+```
+
+```
+##   year annual jan_feb mar_may jun_sep oct_dec
+## 1 2002     25      19      27      27      22
+## 2 2010     25      20      27      27      22
+## 3 1995     25      20      26      28      23
+## 4 2009     25      20      26      27      22
+## 5 2006     25      21      26      27      22
+```
+
+
+```r
+mean_temp_25[[2]]
+```
+
+```
+##       .id type   size not null description
+## 1    year  int normal    FALSE            
+## 2  annual  int normal    FALSE            
+## 3 jan_feb  int normal    FALSE            
+## 4 mar_may  int normal    FALSE            
+## 5 jun_sep  int normal    FALSE            
+## 6 oct_dec  int normal    FALSE
+```</code></pre>
+<p>There’s one more argument that is passed to <code>fetch_data()</code> function, <code>field_type_correction</code>. The data fetch process inadvertently treats all the columns as <code>character</code>. The default setting <code>field_type_correction = TRUE</code> converts these columns back to <code>numeric</code> type based on accompanying metadata.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
