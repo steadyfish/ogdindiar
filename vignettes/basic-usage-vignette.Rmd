@@ -17,6 +17,10 @@ This package provides easy access to the API provided by [Open Government Data P
 
 To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).
 
+    ```{r hide_block, echo = FALSE, results = "hide"}
+    your_api_key = "4a6b520b59fab36f4c78f8bac1a0afcf"
+    ```
+
 ## Installation
 
 This package is currently available on github, you can install the latest development version as follows -
@@ -24,10 +28,6 @@ This package is currently available on github, you can install the latest develo
     ```{r install_lib, echo = TRUE, results = "hide"}
     devtools::install_github("steadyfish/ogdindiar")
     library(ogdindiar)
-    ```
-
-    ```{r hide_block, echo = FALSE, results = "hide"}
-    your_api_key = "4a6b520b59fab36f4c78f8bac1a0afcf"
     ```
 
 ## Basic Usage
@@ -82,9 +82,13 @@ Following example illustrates this -
                             )
     ```
 
+The returned dataset -
+
     ```{r}
     head(mean_temp_25[[1]])
     ```
+
+Metadata about the returned dataset
 
     ```{r}
     mean_temp_25[[2]]

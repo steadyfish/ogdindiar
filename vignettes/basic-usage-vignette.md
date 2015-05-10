@@ -17,6 +17,8 @@ This package provides easy access to the API provided by [Open Government Data P
 
 To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).
 
+
+
 ## Installation
 
 This package is currently available on github, you can install the latest development version as follows -
@@ -30,7 +32,7 @@ This package is currently available on github, you can install the latest develo
     ## Downloading github repo steadyfish/ogdindiar@master
     ## Installing ogdindiar
     ## "C:/PROGRA~1/R/R-32~1.0/bin/x64/R" --vanilla CMD INSTALL  \
-    ##   "C:/Users/DreamerNoob/AppData/Local/Temp/RtmpYljE3l/devtools1aa02a6d52/steadyfish-ogdindiar-a8665b4"  \
+    ##   "C:/Users/DreamerNoob/AppData/Local/Temp/RtmpYljE3l/devtools1aa0395916b0/steadyfish-ogdindiar-e3b2361"  \
     ##   --library="C:/Users/pokerface/R/win-library/3.2" --install-tests 
     ## 
     ## Reloading installed ogdindiar
@@ -40,8 +42,6 @@ This package is currently available on github, you can install the latest develo
     ```r
     library(ogdindiar)
     ```
-
-
 
 ## Basic Usage
 
@@ -141,6 +141,8 @@ Following example illustrates this -
     ## [1] "https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&api-key=4a6b520b59fab36f4c78f8bac1a0afcf&offset=1&limit=100&filters[annual]=25&fields=year,annual,jan_feb,mar_may,jun_sep,oct_dec&sort[jan_feb]=asc&sort[mar_may]=desc"
     ```
 
+The returned dataset -
+
     
     ```r
     head(mean_temp_25[[1]])
@@ -154,6 +156,8 @@ Following example illustrates this -
     ## 4 2009     25      20      26      27      22
     ## 5 2006     25      21      26      27      22
     ```
+
+Metadata about the returned dataset
 
     
     ```r
