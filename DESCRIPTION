@@ -1,7 +1,7 @@
 Package: ogdindiar
 Type: Package
 Title: API access to datasets on Open Government Data - India Portal
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Date: 2015-05-02
 Depends: R (>= 3.2.0)
 Authors@R: person("Dhrumin", "Shah", email = "dhrumins68@gmail.com",
