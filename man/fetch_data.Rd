@@ -4,12 +4,18 @@
 \alias{fetch_data}
 \title{Load data from the Government of India API.}
 \usage{
-fetch_data(res_id, api_key)
+fetch_data(res_id, api_key, filter = NULL, select = NULL, sort = NULL)
 }
 \arguments{
 \item{res_id}{a string, JSON data resource id}
 
 \item{api_key}{a string, private api key of user, can be obtained by signing up on \url{data.gov.in} portal}
+
+\item{filter}{a named vector, specifying equality constrainsts of the form "variable" = "condition"}
+
+\item{select}{a vector, specifying variables/fields to be selected}
+
+\item{sort}{a named vector, specifying sort order in the form "variable" = "order"}
 }
 \value{
 data a data.frame, data from the Government of India API
@@ -20,7 +26,14 @@ data a data.frame, data from the Government of India API
 \examples{
 \dontrun{
 ### fetch a dataset using it's resource id and your personal API key
-fetch_data(res_id = <res_id>, api_key = <api_key>)
+# Basic Use:
+fetch_data()
+
+# Advanced Use, specifying additional parameters
+fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7", api_key = <api_key>,
+           filter = c("state" = "Maharashtra"),
+           select = c("s_no_","constituency","state"),
+           sort = c("s_no_" = "asc","constituency" = "desc"))
 }
 }
 \keyword{Name}

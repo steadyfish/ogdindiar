@@ -5,7 +5,7 @@
 \title{Get JSON data for requested data resource}
 \usage{
 get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
-  res_id, api_key, offset, no_elements)
+  res_id, api_key, offset, no_elements, filter, select, sort)
 }
 \arguments{
 \item{link}{a string, general JSON data link}
@@ -17,12 +17,18 @@ get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
 \item{offset}{an integer, offset of 1 corresponds to 100 elements}
 
 \item{no_elements}{an integer, no of elements to download a value between 1 to 100}
+
+\item{filter}{a named vector, specifying equality constrainsts of the form "variable" = "condition"}
+
+\item{select}{a vector, specifying variables/fields to be selected}
+
+\item{sort}{a named vector, specifying sort order in the form "variable" = "asc"}
 }
 \value{
 JSON data object i.e. a list
 }
 \description{
-\code{get_JSON_doc} will return infomation about the requested resource.
+\code{get_JSON_doc} will return infomation about the requested resource. Ideally, will be just used internally.
 }
 \examples{
 \dontrun{
