@@ -4,7 +4,8 @@
 \alias{fetch_data}
 \title{Load data from the Government of India API.}
 \usage{
-fetch_data(res_id, api_key, filter = NULL, select = NULL, sort = NULL)
+fetch_data(res_id, api_key, filter = NULL, select = NULL, sort = NULL,
+  field_type_correction = TRUE)
 }
 \arguments{
 \item{res_id}{a string, JSON data resource id}
@@ -16,9 +17,11 @@ fetch_data(res_id, api_key, filter = NULL, select = NULL, sort = NULL)
 \item{select}{a vector, specifying variables/fields to be selected}
 
 \item{sort}{a named vector, specifying sort order in the form "variable" = "order"}
+
+\item{field_type_correction}{boolean, whether to apply field type correction. All data fields are downloaded as character and then corrected (if at all) based on accompanying metadata}
 }
 \value{
-data a data.frame, data from the Government of India API
+list a list of 2 elements - data from the Government of India API, and metadata, additional information about the fields
 }
 \description{
 \code{fetch_data} is the main function from this package to load the entire data set from the Government of India API.

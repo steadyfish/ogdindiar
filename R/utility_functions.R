@@ -73,6 +73,35 @@ to_data_frame <- function(lst_elmnt){
   as.data.frame(t(unlist(lst_elmnt)), stringsAsFactors = FALSE)
 }
 
+#' Apply field type correction based on accompanied metadata
+#' 
+#' \code{rectify_field_type} will convert select fields to numeric based on accompanied metadata 
+#' @param d_in, a data.frame on which the correction is to be applied.
+#' @param d_fields, a data.frame containing fields metadata
+#' @return data corrected data.frame
+#' @keywords Internal, rectify
+#' @examples
+#' \dontrun{
+#' rectify_field_type(data_stage2, data_field_type)
+#' }
+#' @export
+rectify_field_type <- function(d_in, d_fields){
+  
+  # get integer fields
+  int_fields = d_fields[d_fields$type=="int",1]
+  print(int_fields)
+  col_names = names(d_in)
+  d_int1 = lapply(X = col_names, FUN = function(x, y, z) {if(x %in% y) class(z[, x]) = "numeric"; 
+                                                          ret = z[, x]; return(ret)},
+                  y = int_fields, z = d_in)
+  names(d_int1) = col_names
+  print("sapply result")
+  print(str(d_int1))
+  d_out = as.data.frame(d_int1, stringsAsFactors = FALSE)
+  
+  return(d_out)
+}
+
 #' Load data from the Government of India API.  
 #'
 #' \code{fetch_data} is the main function from this package to load the entire data set from the Government of India API.
@@ -81,7 +110,8 @@ to_data_frame <- function(lst_elmnt){
 #' @param filter a named vector, specifying equality constrainsts of the form "variable" = "condition"
 #' @param select a vector, specifying variables/fields to be selected
 #' @param sort a named vector, specifying sort order in the form "variable" = "order"
-#' @return data a data.frame, data from the Government of India API
+#' @param field_type_correction boolean, whether to apply field type correction. All data fields are downloaded as character and then corrected (if at all) based on accompanying metadata
+#' @return list a list of 2 elements - data from the Government of India API, and metadata, additional information about the fields
 #' @keywords Name
 #' @examples
 #' \dontrun{
@@ -96,7 +126,7 @@ to_data_frame <- function(lst_elmnt){
 #'            sort = c("s_no_" = "asc","constituency" = "desc"))
 #' }
 #' @export
-fetch_data <- function(res_id, api_key, filter = NULL, select = NULL, sort = NULL){
+fetch_data <- function(res_id, api_key, filter = NULL, select = NULL, sort = NULL, field_type_correction = TRUE){
   current_itr = 0
   return_count = 1
   while(return_count>0){
@@ -113,13 +143,21 @@ fetch_data <- function(res_id, api_key, filter = NULL, select = NULL, sort = NUL
     print(is(data_stage1$id))
     return_count = get_count(JSON_list)
     if(current_itr == 0) {
-      return_data = data_stage1
-      return_field_type = plyr::ldply(get_field_type(JSON_list), to_data_frame)
+      data_stage2 = data_stage1
+      data_field_type = plyr::ldply(get_field_type(JSON_list), to_data_frame)
     }
-    else if(return_count > 0) return_data = rbind(return_data, data_stage1)
+    else if(return_count > 0) data_stage2 = rbind(data_stage2, data_stage1)
     print(current_itr)
-    print(is(return_data$id))
+    print(is(data_stage2$id))
     current_itr = current_itr + 1  
   }
-  list(return_data, return_field_type)
+  
+  if(field_type_correction){
+    print("123")
+    data_stage3 = rectify_field_type(data_stage2, data_field_type)
+  }
+  else{
+    data_stage3 = data_stage2
+  }
+  list(data_stage3, data_field_type)
 }
