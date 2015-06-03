@@ -21,6 +21,7 @@
 #' @param filter a named vector, specifying equality constrainsts of the form "variable" = "condition"
 #' @param select a vector, specifying variables/fields to be selected
 #' @param sort a named vector, specifying sort order in the form "variable" = "asc"
+#' @param verbose a boolean, specifying whether to print verbose messages
 #' @return JSON data object i.e. a list
 #' @keywords Name
 #' @examples
@@ -37,7 +38,7 @@
 #' @export
 get_JSON_doc <- function(link = "https://data.gov.in/api/datastore/resource.json?", 
                          res_id, api_key, offset, no_elements,
-                         filter, select, sort){
+                         filter, select, sort, verbose = FALSE){
   filter_str = ifelse(!is.null(filter), paste0("&filters[", paste(names(filter), filter, sep="]="), collapse = ""), "")
   select_str = ifelse(!is.null(select), paste0("&fields=", paste(select, collapse = "," )), "")
   sort_str = ifelse(!is.null(sort), paste0("&sort[", paste(names(sort), sort, sep="]="), collapse = ""), "")
@@ -57,7 +58,8 @@ get_JSON_doc <- function(link = "https://data.gov.in/api/datastore/resource.json
 #                               ))
 #   credentials$handshake()
     
-  print(JSON_URL)
+  if(verbose) print(JSON_URL)
+
   doc = RCurl::getURL(url = JSON_URL, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")) # 
   d_out = RJSONIO::fromJSON(doc)
   return(d_out)
