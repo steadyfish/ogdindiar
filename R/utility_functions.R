@@ -51,8 +51,14 @@ get_JSON_doc <- function(link = "https://data.gov.in/api/datastore/resource.json
                    select_str,
                    sort_str,
                    sep="")
+  
+#   options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")
+#                               , verbose = "TRUE"
+#                               ))
+#   credentials$handshake()
+    
   print(JSON_URL)
-  doc = RCurl::getURL(url = JSON_URL, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
+  doc = RCurl::getURL(url = JSON_URL, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")) # 
   d_out = RJSONIO::fromJSON(doc)
   return(d_out)
 }
