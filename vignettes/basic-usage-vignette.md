@@ -1,12 +1,13 @@
 ---
 title: "Introduction"
 author: "Dhrumin Shah"
-date: "2015-05-10"
+date: "2015-06-02"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  
 ---
 
 ## Introduction
@@ -21,27 +22,27 @@ To use this package to download data from [Open Government Data Platform - India
 
 ## Installation
 
-This package is currently available on github, you can install the latest development version as follows -
+This package is currently available on github, you can install the latest development version as follows.
 
-    
-    ```r
-    devtools::install_github("steadyfish/ogdindiar")
-    ```
-    
-    ```
-    ## Downloading github repo steadyfish/ogdindiar@master
-    ## Installing ogdindiar
-    ## "C:/PROGRA~1/R/R-32~1.0/bin/x64/R" --vanilla CMD INSTALL  \
-    ##   "C:/Users/DreamerNoob/AppData/Local/Temp/RtmpYljE3l/devtools1aa0395916b0/steadyfish-ogdindiar-e3b2361"  \
-    ##   --library="C:/Users/pokerface/R/win-library/3.2" --install-tests 
-    ## 
-    ## Reloading installed ogdindiar
-    ## Welcome to ogdindiar
-    ```
-    
-    ```r
-    library(ogdindiar)
-    ```
+
+```r
+devtools::install_github("steadyfish/ogdindiar")
+```
+
+```
+## Downloading github repo steadyfish/ogdindiar@master
+## Installing ogdindiar
+## "C:/PROGRA~1/R/R-32~1.0/bin/x64/R" --vanilla CMD INSTALL  \
+##   "C:/Users/DreamerNoob/AppData/Local/Temp/RtmpgnQAhh/devtoolsc146a162697/steadyfish-ogdindiar-26a257c"  \
+##   --library="C:/Users/pokerface/R/win-library/3.2" --install-tests 
+## 
+## Reloading installed ogdindiar
+## Welcome to ogdindiar
+```
+
+```r
+library(ogdindiar)
+```
 
 ## Basic Usage
 
@@ -57,64 +58,58 @@ Resource id for the datasets can be found on the data specific page. For example
 
 Once you have figured out these 2 parameters you can download that datasets as follows: 
 
-    
-    ```r
-    mean_temp_data = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
-                            api_key = your_api_key)
-    ```
-    
-    ```
-    ## [1] "https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&api-key=4a6b520b59fab36f4c78f8bac1a0afcf&offset=0&limit=100"
-    ## [1] "https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&api-key=4a6b520b59fab36f4c78f8bac1a0afcf&offset=1&limit=100"
-    ## [1] "https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&api-key=4a6b520b59fab36f4c78f8bac1a0afcf&offset=2&limit=100"
-    ```
+
+```r
+mean_temp_data = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
+                        api_key = your_api_key)
+```
 
 This function returns a list of 2 elements.
 
 * The first element is the data
 
-    
-    ```r
-    head(mean_temp_data[[1]])
-    ```
-    
-    ```
-    ##     id  timestamp year annual jan_feb mar_may jun_sep oct_dec
-    ## 1 1123 1424778424 1957     23      18      25      27      21
-    ## 2 1423 1424778424 1972     24      18      25      27      21
-    ## 3 1443 1424778424 1973     24      19      26      27      21
-    ## 4 1463 1424778424 1974     24      18      26      27      21
-    ## 5 1483 1424778424 1975     23      18      25      26      21
-    ## 6 1503 1424778424 1976     24      18      25      26      22
-    ```
+
+```r
+head(mean_temp_data[[1]])
+```
+
+```
+##     id  timestamp year annual jan_feb mar_may jun_sep oct_dec
+## 1 1123 1424778424 1957     23      18      25      27      21
+## 2 1423 1424778424 1972     24      18      25      27      21
+## 3 1443 1424778424 1973     24      19      26      27      21
+## 4 1463 1424778424 1974     24      18      26      27      21
+## 5 1483 1424778424 1975     23      18      25      26      21
+## 6 1503 1424778424 1976     24      18      25      26      22
+```
 
 * The second element is a dataframe containing metadata about the columns.
 
-    
-    ```r
-    mean_temp_data[[2]]
-    ```
-    
-    ```
-    ##         .id   type   size unsigned not null
-    ## 1        id serial normal     TRUE     TRUE
-    ## 2 timestamp    int normal     TRUE    FALSE
-    ## 3      year    int normal     <NA>    FALSE
-    ## 4    annual    int normal     <NA>    FALSE
-    ## 5   jan_feb    int normal     <NA>    FALSE
-    ## 6   mar_may    int normal     <NA>    FALSE
-    ## 7   jun_sep    int normal     <NA>    FALSE
-    ## 8   oct_dec    int normal     <NA>    FALSE
-    ##                        description
-    ## 1                                 
-    ## 2 The Unix timestamp for the data.
-    ## 3                                 
-    ## 4                                 
-    ## 5                                 
-    ## 6                                 
-    ## 7                                 
-    ## 8
-    ```
+
+```r
+mean_temp_data[[2]]
+```
+
+```
+##         .id   type   size unsigned not null
+## 1        id serial normal     TRUE     TRUE
+## 2 timestamp    int normal     TRUE    FALSE
+## 3      year    int normal     <NA>    FALSE
+## 4    annual    int normal     <NA>    FALSE
+## 5   jan_feb    int normal     <NA>    FALSE
+## 6   mar_may    int normal     <NA>    FALSE
+## 7   jun_sep    int normal     <NA>    FALSE
+## 8   oct_dec    int normal     <NA>    FALSE
+##                        description
+## 1                                 
+## 2 The Unix timestamp for the data.
+## 3                                 
+## 4                                 
+## 5                                 
+## 6                                 
+## 7                                 
+## 8
+```
 
 ## Advanced Usage
 
@@ -126,53 +121,48 @@ Instead of downloading entire datasets you can conditionally download specific d
 
 Following example illustrates this -
 
-    
-    ```r
-    mean_temp_25 = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
-                            api_key = your_api_key,
-                            filter = c("annual" = "25"),
-                            select = c("year", "annual", "jan_feb", "mar_may", "jun_sep", "oct_dec"),
-                            sort = c("jan_feb" = "asc", "mar_may" = "desc")
-                            )
-    ```
-    
-    ```
-    ## [1] "https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&api-key=4a6b520b59fab36f4c78f8bac1a0afcf&offset=0&limit=100&filters[annual]=25&fields=year,annual,jan_feb,mar_may,jun_sep,oct_dec&sort[jan_feb]=asc&sort[mar_may]=desc"
-    ## [1] "https://data.gov.in/api/datastore/resource.json?resource_id=98fe9271-a59d-4834-b05b-fd5ddb94ac01&api-key=4a6b520b59fab36f4c78f8bac1a0afcf&offset=1&limit=100&filters[annual]=25&fields=year,annual,jan_feb,mar_may,jun_sep,oct_dec&sort[jan_feb]=asc&sort[mar_may]=desc"
-    ```
+
+```r
+mean_temp_25 = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
+                        api_key = your_api_key,
+                        filter = c("annual" = "25"),
+                        select = c("year", "annual", "jan_feb", "mar_may", "jun_sep", "oct_dec"),
+                        sort = c("jan_feb" = "asc", "mar_may" = "desc")
+                        )
+```
 
 The returned dataset -
 
-    
-    ```r
-    head(mean_temp_25[[1]])
-    ```
-    
-    ```
-    ##   year annual jan_feb mar_may jun_sep oct_dec
-    ## 1 2002     25      19      27      27      22
-    ## 2 2010     25      20      27      27      22
-    ## 3 1995     25      20      26      28      23
-    ## 4 2009     25      20      26      27      22
-    ## 5 2006     25      21      26      27      22
-    ```
+
+```r
+head(mean_temp_25[[1]])
+```
+
+```
+##   year annual jan_feb mar_may jun_sep oct_dec
+## 1 2002     25      19      27      27      22
+## 2 2010     25      20      27      27      22
+## 3 1995     25      20      26      28      23
+## 4 2009     25      20      26      27      22
+## 5 2006     25      21      26      27      22
+```
 
 Metadata about the returned dataset
 
-    
-    ```r
-    mean_temp_25[[2]]
-    ```
-    
-    ```
-    ##       .id type   size not null description
-    ## 1    year  int normal    FALSE            
-    ## 2  annual  int normal    FALSE            
-    ## 3 jan_feb  int normal    FALSE            
-    ## 4 mar_may  int normal    FALSE            
-    ## 5 jun_sep  int normal    FALSE            
-    ## 6 oct_dec  int normal    FALSE
-    ```
+
+```r
+mean_temp_25[[2]]
+```
+
+```
+##       .id type   size not null description
+## 1    year  int normal    FALSE            
+## 2  annual  int normal    FALSE            
+## 3 jan_feb  int normal    FALSE            
+## 4 mar_may  int normal    FALSE            
+## 5 jun_sep  int normal    FALSE            
+## 6 oct_dec  int normal    FALSE
+```
 
 There's one more argument that is passed to `fetch_data()` function, `field_type_correction`. The data fetch process inadvertently treats all the columns as `character`. The default setting `field_type_correction = TRUE` converts these columns back to `numeric` type based on accompanying metadata.
 

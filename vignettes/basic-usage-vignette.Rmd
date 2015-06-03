@@ -18,7 +18,7 @@ This package provides easy access to the API provided by [Open Government Data P
 
 To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).
 
-```{r hideblock, echo=FALSE, results='hide', message=FALSE }
+```{r hideblock, echo=FALSE, results='hide'}
 your_api_key = "4a6b520b59fab36f4c78f8bac1a0afcf"
 ```
 
