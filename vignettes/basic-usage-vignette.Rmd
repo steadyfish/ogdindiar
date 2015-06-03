@@ -7,6 +7,7 @@ vignette: >
   %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  
 ---
 
 ## Introduction
@@ -17,18 +18,19 @@ This package provides easy access to the API provided by [Open Government Data P
 
 To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).
 
-    ```{r hide_block, echo = FALSE, results = "hide"}
-    your_api_key = "4a6b520b59fab36f4c78f8bac1a0afcf"
-    ```
+```{r hideblock, echo=FALSE, results='hide', message=FALSE }
+your_api_key = "4a6b520b59fab36f4c78f8bac1a0afcf"
+```
 
 ## Installation
 
-This package is currently available on github, you can install the latest development version as follows -
+This package is currently available on github, you can install the latest development version as follows.
 
-    ```{r install_lib, echo = TRUE, results = "hide"}
-    devtools::install_github("steadyfish/ogdindiar")
-    library(ogdindiar)
-    ```
+```{r installlib, echo=TRUE, results='hide'}
+devtools::install_github("steadyfish/ogdindiar")
+
+library(ogdindiar)
+```
 
 ## Basic Usage
 
@@ -44,24 +46,24 @@ Resource id for the datasets can be found on the data specific page. For example
 
 Once you have figured out these 2 parameters you can download that datasets as follows: 
 
-    ```{r}
-    mean_temp_data = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
-                            api_key = your_api_key)
-    ```
+```{r}
+mean_temp_data = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
+                        api_key = your_api_key)
+```
 
 This function returns a list of 2 elements.
 
 * The first element is the data
 
-    ```{r}
-    head(mean_temp_data[[1]])
-    ```
+```{r}
+head(mean_temp_data[[1]])
+```
 
 * The second element is a dataframe containing metadata about the columns.
 
-    ```{r}
-    mean_temp_data[[2]]
-    ```
+```{r}
+mean_temp_data[[2]]
+```
 
 ## Advanced Usage
 
@@ -73,26 +75,26 @@ Instead of downloading entire datasets you can conditionally download specific d
 
 Following example illustrates this -
 
-    ```{r}
-    mean_temp_25 = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
-                            api_key = your_api_key,
-                            filter = c("annual" = "25"),
-                            select = c("year", "annual", "jan_feb", "mar_may", "jun_sep", "oct_dec"),
-                            sort = c("jan_feb" = "asc", "mar_may" = "desc")
-                            )
-    ```
+```{r}
+mean_temp_25 = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
+                        api_key = your_api_key,
+                        filter = c("annual" = "25"),
+                        select = c("year", "annual", "jan_feb", "mar_may", "jun_sep", "oct_dec"),
+                        sort = c("jan_feb" = "asc", "mar_may" = "desc")
+                        )
+```
 
 The returned dataset -
 
-    ```{r}
-    head(mean_temp_25[[1]])
-    ```
+```{r}
+head(mean_temp_25[[1]])
+```
 
 Metadata about the returned dataset
 
-    ```{r}
-    mean_temp_25[[2]]
-    ```
+```{r}
+mean_temp_25[[2]]
+```
 
 There's one more argument that is passed to `fetch_data()` function, `field_type_correction`. The data fetch process inadvertently treats all the columns as `character`. The default setting `field_type_correction = TRUE` converts these columns back to `numeric` type based on accompanying metadata.
 
