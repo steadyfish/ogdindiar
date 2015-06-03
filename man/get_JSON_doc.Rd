@@ -5,7 +5,7 @@
 \title{Get JSON data for requested data resource}
 \usage{
 get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
-  res_id, api_key, offset, no_elements, filter, select, sort)
+  res_id, api_key, offset, no_elements, filter, select, sort, verbose = FALSE)
 }
 \arguments{
 \item{link}{a string, general JSON data link}
