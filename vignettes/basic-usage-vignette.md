@@ -32,9 +32,6 @@ devtools::install_github("steadyfish/ogdindiar")
 ```
 ## Downloading github repo steadyfish/ogdindiar@master
 ## Installing ogdindiar
-## "C:/PROGRA~1/R/R-32~1.0/bin/x64/R" --vanilla CMD INSTALL  \
-##   "C:/Users/DreamerNoob/AppData/Local/Temp/RtmpSw7Ta1/devtools9646fcc7427/steadyfish-ogdindiar-d8a95e2"  \
-##   --library="C:/Users/pokerface/R/win-library/3.2" --install-tests
 ```
 
 ```r
