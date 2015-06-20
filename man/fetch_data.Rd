@@ -4,13 +4,11 @@
 \alias{fetch_data}
 \title{Load data from the Government of India API.}
 \usage{
-fetch_data(res_id, api_key, filter = NULL, select = NULL, sort = NULL,
+fetch_data(res_id, filter = NULL, select = NULL, sort = NULL,
   field_type_correction = TRUE)
 }
 \arguments{
 \item{res_id}{a string, JSON data resource id}
-
-\item{api_key}{a string, private api key of user, can be obtained by signing up on \url{data.gov.in} portal}
 
 \item{filter}{a named vector, specifying equality constrainsts of the form "variable" = "condition"}
 
@@ -33,7 +31,7 @@ list a list of 2 elements - data from the Government of India API, and metadata,
 fetch_data()
 
 # Advanced Use, specifying additional parameters
-fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7", api_key = <api_key>,
+fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7"
            filter = c("state" = "Maharashtra"),
            select = c("s_no_","constituency","state"),
            sort = c("s_no_" = "asc","constituency" = "desc"))

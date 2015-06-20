@@ -5,14 +5,12 @@
 \title{Get JSON data for requested data resource}
 \usage{
 get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
-  res_id, api_key, offset, no_elements, filter, select, sort, verbose = FALSE)
+  res_id, offset, no_elements, filter, select, sort, verbose = FALSE)
 }
 \arguments{
 \item{link}{a string, general JSON data link}
 
 \item{res_id}{a string, JSON data resource id}
-
-\item{api_key}{a string, private api key of user, can be obtained by signing up on data.gov.in portal}
 
 \item{offset}{an integer, offset of 1 corresponds to 100 elements}
 
@@ -23,6 +21,8 @@ get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
 \item{select}{a vector, specifying variables/fields to be selected}
 
 \item{sort}{a named vector, specifying sort order in the form "variable" = "asc"}
+
+\item{verbose}{a boolean, specifying whether to print verbose messages}
 }
 \value{
 JSON data object i.e. a list
@@ -37,7 +37,6 @@ library(RJSONIO)
 # Return 100 elements from a hotels data resource
 JSON_doc = get_JSON_doc(link="http://data.gov.in/api/datastore/resource.json?",
    res_id="0749068c-a590-4a07-a571-e9df5dddcc8a",
-   api_key=api_key,
    offset=0,
    no_elements=100)
 }

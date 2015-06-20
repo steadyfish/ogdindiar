@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 author: "Dhrumin Shah"
-date: "2015-06-02"
+date: "2015-06-19"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction}
@@ -16,9 +16,7 @@ This package provides easy access to the API provided by [Open Government Data P
 
 ## Prerequisite
 
-To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).
-
-
+To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string). When you make your first API call you'll be asked to provide this API key. You can also permanently store this key in your `.Renviron` file as OGDINDIA_API_KEY. For more info see ?ogdindia_api_key 
 
 ## Installation
 
@@ -26,40 +24,28 @@ This package is currently available on github, you can install the latest develo
 
 
 ```r
-devtools::install_github("steadyfish/ogdindiar")
-```
+# devtools::install_github("steadyfish/ogdindiar")
 
-```
-## Downloading github repo steadyfish/ogdindiar@master
-## Installing ogdindiar
-```
-
-```r
 library(ogdindiar)
-```
-
-```
-## Welcome to ogdindiar
 ```
 
 ## Basic Usage
 
-The main function this package provides is `fetch_data()`. At minimum, you need to provide 2 arguments to this function.
+When calling OGD India API, at minimum, you need to provide 2 parameters.
 
 * res_id: Resource id of the dataset you want to access
 * api_key: Your personal API key (See Prerequisite above)
 
 Resource id for the datasets can be found on the data specific page. For example, this page has the resource id information for [Annual And Seasonal Mean Temperature Of India](https://data.gov.in/resources/annual-and-seasonal-mean-temperature-india/api). The resource id a string that's part of Datastore API URL. 
 
-* The URL for this dataset as shown on the page is - https://data.gov.in/api/datastore/resource.json?resource_id=<mark>98fe9271-a59d-4834-b05b-fd5ddb94ac01</mark>&api-key=YOURKEY 
+* The URL for this dataset as shown on the page is - https://data.gov.in/api/datastore/resource.json?resource_id=<mark>98fe9271-a59d-4834-b05b-fd5ddb94ac01</mark>&api-key=OGDINDIA_API_KEY 
 * The resource id is the highlighted part in the above URL.
 
-Once you have figured out these 2 parameters you can download that datasets as follows: 
+The main function this package provides is `fetch_data()`. Once you have figured out the resource id, you can download that dataset as follows: 
 
 
 ```r
-mean_temp_data = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
-                        api_key = your_api_key)
+mean_temp_data = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01")
 ```
 
 This function returns a list of 2 elements.
@@ -122,7 +108,6 @@ Following example illustrates this -
 
 ```r
 mean_temp_25 = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
-                        api_key = your_api_key,
                         filter = c("annual" = "25"),
                         select = c("year", "annual", "jan_feb", "mar_may", "jun_sep", "oct_dec"),
                         sort = c("jan_feb" = "asc", "mar_may" = "desc")

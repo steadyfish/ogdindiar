@@ -1,7 +1,37 @@
-####Download the data from Government of India open data portal#####
-# w_dir = getwd()
-# source(file=file.path("R/core.R"))
-# check_and_download(c("XML","RCurl","RJSONIO","plyr","dplyr"))
+#' Get or set OGDINDIA_API_KEY value
+#'
+#' The API wrapper functions in this package all rely on a Open Government Data India API
+#' key residing in the environment variable \code{OGDINDIA_API_KEY}. The
+#' easiest way to accomplish this is to set it in the `.Renviron` file in your
+#' home directory.
+#'
+#' @param force Force setting a new PassiveTotal API key for the current environment?
+#' @return atomic character vector containing the Open Government Data India API key
+#' @export
+ogdindia_api_key <- function(force = FALSE) {
+  
+  env <- Sys.getenv('OGDINDIA_API_KEY')
+  if (!identical(env, "") && !force) return(env)
+  
+  if (!interactive()) {
+    stop("Please set env var OGDINDIA_API_KEY to your Open Government Data India API key",
+         call. = FALSE)
+  }
+  
+  message("Couldn't find env var OGDINDIA_API_KEY See ?ogdindia_api_key for more details.")
+  message("Please enter your API key and press enter:")
+  pat <- readline(": ")
+  
+  if (identical(pat, "")) {
+    stop("Open Government Data India API key entry failed", call. = FALSE)
+  }
+  
+  message("Updating OGDINDIA_API_KEY env var to PAT")
+  Sys.setenv(OGDINDIA_API_KEY = pat)
+  
+  pat
+  
+}
 
 ### Alternative - 1: Using APIs ###
 #JSON#
@@ -15,7 +45,6 @@
 #' \code{get_JSON_doc} will return infomation about the requested resource. Ideally, will be just used internally.
 #' @param link a string, general JSON data link
 #' @param res_id a string, JSON data resource id
-#' @param api_key a string, private api key of user, can be obtained by signing up on data.gov.in portal
 #' @param offset an integer, offset of 1 corresponds to 100 elements
 #' @param no_elements an integer, no of elements to download a value between 1 to 100
 #' @param filter a named vector, specifying equality constrainsts of the form "variable" = "condition"
@@ -31,17 +60,17 @@
 #' # Return 100 elements from a hotels data resource
 #' JSON_doc = get_JSON_doc(link="http://data.gov.in/api/datastore/resource.json?",
 #'    res_id="0749068c-a590-4a07-a571-e9df5dddcc8a",
-#'    api_key=api_key,
 #'    offset=0,
 #'    no_elements=100)
 #' }
 #' @export
 get_JSON_doc <- function(link = "https://data.gov.in/api/datastore/resource.json?", 
-                         res_id, api_key, offset, no_elements,
+                         res_id, offset, no_elements,
                          filter, select, sort, verbose = FALSE){
   filter_str = ifelse(!is.null(filter), paste0("&filters[", paste(names(filter), filter, sep="]="), collapse = ""), "")
   select_str = ifelse(!is.null(select), paste0("&fields=", paste(select, collapse = "," )), "")
   sort_str = ifelse(!is.null(sort), paste0("&sort[", paste(names(sort), sort, sep="]="), collapse = ""), "")
+  api_key = ogdindia_api_key()
   
   JSON_URL = paste(link,
                    "resource_id=",res_id, 
@@ -111,7 +140,6 @@ rectify_field_type <- function(d_in, d_fields){
 #'
 #' \code{fetch_data} is the main function from this package to load the entire data set from the Government of India API.
 #' @param res_id a string, JSON data resource id
-#' @param api_key a string, private api key of user, can be obtained by signing up on \url{data.gov.in} portal
 #' @param filter a named vector, specifying equality constrainsts of the form "variable" = "condition"
 #' @param select a vector, specifying variables/fields to be selected
 #' @param sort a named vector, specifying sort order in the form "variable" = "order"
@@ -125,19 +153,18 @@ rectify_field_type <- function(d_in, d_fields){
 #' fetch_data()
 #' 
 #' # Advanced Use, specifying additional parameters
-#' fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7", api_key = <api_key>,
+#' fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7"
 #'            filter = c("state" = "Maharashtra"), 
 #'            select = c("s_no_","constituency","state"),
 #'            sort = c("s_no_" = "asc","constituency" = "desc"))
 #' }
 #' @export
-fetch_data <- function(res_id, api_key, filter = NULL, select = NULL, sort = NULL, field_type_correction = TRUE){
+fetch_data <- function(res_id, filter = NULL, select = NULL, sort = NULL, field_type_correction = TRUE){
   current_itr = 0
   return_count = 1
   while(return_count>0){
     JSON_list = get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
                              res_id = res_id,
-                             api_key = api_key,
                              offset = current_itr,
                              no_elements = 100,
                              filter = filter,
