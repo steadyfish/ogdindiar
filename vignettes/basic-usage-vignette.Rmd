@@ -14,28 +14,19 @@ vignette: >
 
 This package provides easy access to the API provided by [Open Government Data Platform - India](https://data.gov.in) to download datasets from R. Here's the list of [Datasets available through API](https://data.gov.in/catalogs#path=is_api/1).
 
-## Prerequisite
-
-To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string). When you make your first API call you'll be asked to provide this API key. You can also permanently store this key in your `.Renviron` file as OGDINDIA_API_KEY. For more info see ?ogdindia_api_key 
-
-## Installation
-
-This package is currently available on github, you can install the latest development version as follows.
+## Basic Usage
 
 ```{r installlib, echo=TRUE, results='hide'}
-# devtools::install_github("steadyfish/ogdindiar")
 
 library(ogdindiar)
 ```
 
-## Basic Usage
-
 When calling OGD India API, at minimum, you need to provide 2 parameters.
 
 * res_id: Resource id of the dataset you want to access
-* api_key: Your personal API key (See Prerequisite above)
+* api_key: Your personal API key (See [Package Installation instructions](https://github.com/steadyfish/ogdindiar/blob/master/README.md))
 
-Resource id for the datasets can be found on the data specific page. For example, this page has the resource id information for [Annual And Seasonal Mean Temperature Of India](https://data.gov.in/resources/annual-and-seasonal-mean-temperature-india/api). The resource id a string that's part of Datastore API URL. 
+Resource id for the datasets can be found on the data specific page. For example, this page has the resource id information for [Annual And Seasonal Mean Temperature Of India](https://data.gov.in/resources/annual-and-seasonal-mean-temperature-india/api). The resource is a string that's part of Datastore API URL. 
 
 * The URL for this dataset as shown on the page is - https://data.gov.in/api/datastore/resource.json?resource_id=<mark>98fe9271-a59d-4834-b05b-fd5ddb94ac01</mark>&api-key=OGDINDIA_API_KEY 
 * The resource id is the highlighted part in the above URL.
