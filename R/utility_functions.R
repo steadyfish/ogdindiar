@@ -20,16 +20,16 @@ ogdindia_api_key <- function(force = FALSE) {
   
   message("Couldn't find env var OGDINDIA_API_KEY See ?ogdindia_api_key for more details.")
   message("Please enter your API key and press enter:")
-  pat <- readline(": ")
+  api_key <- readline(": ")
   
   if (identical(pat, "")) {
     stop("Open Government Data India API key entry failed", call. = FALSE)
   }
   
-  message("Updating OGDINDIA_API_KEY env var to PAT")
-  Sys.setenv(OGDINDIA_API_KEY = pat)
+  message(paste0("Updating OGDINDIA_API_KEY env var to ", api_key))
+  Sys.setenv(OGDINDIA_API_KEY = api_key)
   
-  pat
+  api_key
   
 }
 
