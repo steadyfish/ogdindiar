@@ -97,7 +97,7 @@ get_JSON_doc <- function(link = "https://data.gov.in/api/datastore/resource.json
 #' Convert data from list to a data.frame  
 #'
 #' \code{to_data_frame} will convert data from 'list' to a 'data.frame'. 
-#' @param x a list of data from a JSON data object
+#' @param lst_elmnt a list of data from a JSON data object
 #' @return data a data.frame, data from the JSON data object
 #' @keywords Name
 #' @examples

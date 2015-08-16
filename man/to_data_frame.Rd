@@ -7,7 +7,7 @@
 to_data_frame(lst_elmnt)
 }
 \arguments{
-\item{x}{a list of data from a JSON data object}
+\item{lst_elmnt}{a list of data from a JSON data object}
 }
 \value{
 data a data.frame, data from the JSON data object
