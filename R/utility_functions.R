@@ -22,7 +22,7 @@ ogdindia_api_key <- function(force = FALSE) {
   message("Please enter your API key and press enter:")
   api_key <- readline(": ")
   
-  if (identical(pat, "")) {
+  if (identical(api_key, "")) {
     stop("Open Government Data India API key entry failed", call. = FALSE)
   }
   
