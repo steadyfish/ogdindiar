@@ -7,11 +7,7 @@ R Package to access [Open Government Data from India](https://data.gov.in).
 
 This package provides easy access to the API provided by [Open Government Data Platform - India](https://data.gov.in) to download datasets from R. Here's the list of [Datasets available through API](https://data.gov.in/catalogs#path=is_api/1).
 
-<<<<<<< HEAD
 ## <a name="prerequisite"></a>Prerequisite
-=======
-## Prerequisite
->>>>>>> 5e1587e6ba915a532b8506601b3a36f198162813
 
 * To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string). 
 * You can either set it as a temporary global variable or a permanent global variable. 
