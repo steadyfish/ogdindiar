@@ -23,10 +23,10 @@ library(ogdindiar)
 
 When calling OGD India API, at minimum, you need to provide 2 parameters.
 
-* res_id: Resource id of the dataset you want to access
-* api_key: Your personal API key (See [Package Installation instructions](https://github.com/steadyfish/ogdindiar/blob/master/README.md))
+* `res_id`: Resource id of the dataset you want to access
+* `api_key`: Your personal API key (See [Package Installation instructions](https://github.com/steadyfish/ogdindiar/blob/master/README.md#prerequisite))
 
-Resource id for the datasets can be found on the data specific page. For example, this page has the resource id information for [Annual And Seasonal Mean Temperature Of India](https://data.gov.in/resources/annual-and-seasonal-mean-temperature-india/api). The resource is a string that's part of Datastore API URL. 
+Resource id for the datasets can be found on the data specific page on the data portal. For example, this page has the resource id information for [Annual And Seasonal Mean Temperature Of India](https://data.gov.in/resources/annual-and-seasonal-mean-temperature-india/api). The resource is a string that's part of Datastore API URL. 
 
 * The URL for this dataset as shown on the page is - https://data.gov.in/api/datastore/resource.json?resource_id=<mark>98fe9271-a59d-4834-b05b-fd5ddb94ac01</mark>&api-key=OGDINDIA_API_KEY 
 * The resource id is the highlighted part in the above URL.
@@ -42,18 +42,18 @@ This function returns a list of 2 elements.
 * The first element is the data
 
 ```{r}
-head(mean_temp_data[[1]])
+knitr::kable(head(mean_temp_data[[1]]))
 ```
 
 * The second element is a dataframe containing metadata about the columns.
 
 ```{r}
-mean_temp_data[[2]]
+knitr::kable(mean_temp_data[[2]])
 ```
 
 ## Advanced Usage
 
-Instead of downloading entire datasets you can conditionally download specific data. These functions are achieved using additional arguments to `fetch_data()` function. Currently you can use -
+Instead of downloading entire datasets you can conditionally download specific data elements. This functionality is achieved using additional arguments to `fetch_data()` function. Currently you can use -
 
 * `filter` to filter the dataset using __equality constraints__ on specific columns.
 * `select` to select specific set of columns to be downloaded.
@@ -72,13 +72,13 @@ mean_temp_25 = fetch_data(res_id = "98fe9271-a59d-4834-b05b-fd5ddb94ac01",
 The returned dataset -
 
 ```{r}
-head(mean_temp_25[[1]])
+knitr::kable(head(mean_temp_25[[1]]))
 ```
 
 Metadata about the returned dataset
 
 ```{r}
-mean_temp_25[[2]]
+knitr::kable(mean_temp_25[[2]])
 ```
 
 There's one more argument that is passed to `fetch_data()` function, `field_type_correction`. The data fetch process inadvertently treats all the columns as `character`. The default setting `field_type_correction = TRUE` converts these columns back to `numeric` type based on accompanying metadata.
