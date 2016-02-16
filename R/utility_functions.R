@@ -144,13 +144,14 @@ rectify_field_type <- function(d_in, d_fields){
 #' @param select a vector, specifying variables/fields to be selected
 #' @param sort a named vector, specifying sort order in the form "variable" = "order"
 #' @param field_type_correction boolean, whether to apply field type correction. All data fields are downloaded as character and then corrected (if at all) based on accompanying metadata
+#' @param max_obs an integer, specifying maximum no of observations to fetch (will be rounded UP to the nearest 100)
 #' @return list a list of 2 elements - data from the Government of India API, and metadata, additional information about the fields
 #' @keywords Name
 #' @examples
 #' \dontrun{
 #' ### fetch a dataset using it's resource id and your personal API key
 #' # Basic Use:
-#' fetch_data()
+#' fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7")
 #' 
 #' # Advanced Use, specifying additional parameters
 #' fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7"
@@ -159,10 +160,11 @@ rectify_field_type <- function(d_in, d_fields){
 #'            sort = c("s_no_" = "asc","constituency" = "desc"))
 #' }
 #' @export
-fetch_data <- function(res_id, filter = NULL, select = NULL, sort = NULL, field_type_correction = TRUE){
+fetch_data <- function(res_id, filter = NULL, select = NULL, sort = NULL, field_type_correction = TRUE, max_obs = 500){
   current_itr = 0
   return_count = 1
-  while(return_count>0){
+  no_rows = 0
+  while(return_count > 0 & no_rows < max_obs){
     JSON_list = get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
                              res_id = res_id,
                              offset = current_itr,
@@ -177,6 +179,8 @@ fetch_data <- function(res_id, filter = NULL, select = NULL, sort = NULL, field_
       data_field_type = plyr::ldply(get_field_type(JSON_list), to_data_frame)
     }
     else if(return_count > 0) data_stage2 = rbind(data_stage2, data_stage1)
+    
+    no_rows = nrow(data_stage2)
     current_itr = current_itr + 1  
   }
   

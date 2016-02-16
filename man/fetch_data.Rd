@@ -5,7 +5,7 @@
 \title{Load data from the Government of India API.}
 \usage{
 fetch_data(res_id, filter = NULL, select = NULL, sort = NULL,
-  field_type_correction = TRUE)
+  field_type_correction = TRUE, max_obs = 500)
 }
 \arguments{
 \item{res_id}{a string, JSON data resource id}
@@ -17,6 +17,8 @@ fetch_data(res_id, filter = NULL, select = NULL, sort = NULL,
 \item{sort}{a named vector, specifying sort order in the form "variable" = "order"}
 
 \item{field_type_correction}{boolean, whether to apply field type correction. All data fields are downloaded as character and then corrected (if at all) based on accompanying metadata}
+
+\item{max_obs}{an integer, specifying maximum no of observations to fetch (will be rounded UP to the nearest 100)}
 }
 \value{
 list a list of 2 elements - data from the Government of India API, and metadata, additional information about the fields
@@ -28,7 +30,7 @@ list a list of 2 elements - data from the Government of India API, and metadata,
 \dontrun{
 ### fetch a dataset using it's resource id and your personal API key
 # Basic Use:
-fetch_data()
+fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7")
 
 # Advanced Use, specifying additional parameters
 fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7"
