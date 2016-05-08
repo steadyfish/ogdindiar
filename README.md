@@ -45,6 +45,7 @@ vignette("basic-usage-vignette")
 ### Authors 
   
   [Dhrumin Shah](https://github.com/steadyfish/)
+  [Sainath Adapa](http://sainathadapa.github.io/)
 
 ### Credits 
   
