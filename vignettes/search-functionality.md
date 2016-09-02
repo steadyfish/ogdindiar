@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-A typical search for datasets in the treasure trove of information, that is data.gov.in may proceed as follows. The person has a topic in mind, he enters the keywords for that topic in the search field, and clicks search. This will result in a list of catalogs related to the topic searched. The user then proceeds to click a few catalogs, and looks for the relavant datasets. Once he finds a dataset, he then will download the dataset, imports it into R, and starts the analysis.
+A typical search for datasets in the [Open Government Data Platform - India](https://data.gov.in) may proceed as follows. The person has a topic in mind, he enters the keywords for that topic in the search field, and clicks search. This will result in a list of catalogs related to the topic searched. The user then proceeds to click a few catalogs, and looks for the relavant datasets. Once he finds a dataset, he then will download the dataset, imports it into R, and starts the analysis.
 
 The search functionality in this package is intended to help users by enabling the user to search for datasets directly from R. Once a particular dataset has been identified, the user can download the dataset using the `fetch_data` function if the dataset has API access. If the dataset doesn't have API access, then the user can choose among the numerous utilies that are available in the R ecosystem to download and import data.
 
