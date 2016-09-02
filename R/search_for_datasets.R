@@ -1,11 +1,13 @@
 mk_link <- . %>% paste0("https://data.gov.in", .)
 
 generator_of_get_link <- function(x, wait = 0.25) {
-  last_url_accessed <- NA_real_
+  
+  env_obj <- new.env(hash = FALSE, emptyenv())
+  env_obj$last_url_accessed <- NA_real_
   
   function(x, wait = 0.25) {
-    if ( !is.na(last_url_accessed) &&
-         ((diff <- as.numeric(Sys.time()) - last_url_accessed) < wait) ) {
+    if ( !is.na(env_obj$last_url_accessed) &&
+         ((diff <- as.numeric(Sys.time()) - env_obj$last_url_accessed) < wait) ) {
       Sys.sleep(wait - diff)
     }
     
@@ -13,8 +15,7 @@ generator_of_get_link <- function(x, wait = 0.25) {
     message('Requesting page ', x)
     ans <- read_html(x)
     
-    #TODO: Replace <<- usage here
-    last_url_accessed <<- as.numeric(Sys.time())
+    env_obj$last_url_accessed <- as.numeric(Sys.time())
     
     ans
   }
