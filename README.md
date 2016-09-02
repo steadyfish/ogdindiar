@@ -34,10 +34,11 @@ devtools::install_github("steadyfish/ogdindiar", build_vignettes = TRUE)
 
 ## Usage
 
-For usage, check out this [Vignette](https://github.com/steadyfish/ogdindiar/blob/master/vignettes/basic-usage-vignette.md). Otherwise, you can run the following, if you have installed the package with `build_vignettes = TRUE` option - 
+For usage, check out these vignettes -  [Introduction](https://github.com/steadyfish/ogdindiar/blob/master/vignettes/basic-usage-vignette.md) and [Search functionality](https://github.com/steadyfish/ogdindiar/blob/master/vignettes/search-functionality.md). Otherwise, you can run the following, if you have installed the package with `build_vignettes = TRUE` option - 
 
 ```r
 vignette("basic-usage-vignette")
+vignette("search-functionality")
 ```
 
 ******
