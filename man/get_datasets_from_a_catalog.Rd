@@ -4,12 +4,15 @@
 \alias{get_datasets_from_a_catalog}
 \title{get data sets for a catalog}
 \usage{
-get_datasets_from_a_catalog(catalog_link, limit_pages = 5L)
+get_datasets_from_a_catalog(catalog_link, limit_dataset_pages = 5L,
+  limit_datasets = 10L)
 }
 \arguments{
 \item{catalog_link}{Link to the catalog}
 
-\item{limit_pages}{Limit the number of pages that the function should request. Each page contains a list of data sets.}
+\item{limit_dataset_pages}{Limit the number of pages that should be requested and parsed, to acquire the datasets. Default is 5. Set to Inf to request all.}
+
+\item{limit_datasets}{Request more pages until the number of datasets obtained reaches this limit. Default is 10. Set to Inf to request all.}
 }
 \description{
 Get the list of data sets and related info for a catalog
@@ -17,8 +20,8 @@ Get the list of data sets and related info for a catalog
 \examples{
 \dontrun{
 get_datasets_from_a_catalog(
-'https://data.gov.in/catalog/fishing-harbours-fisheries-statistics-2014',
-limit_pages = Inf)
+'https://data.gov.in/catalog/session-wise-statistical-information-relating-questions-rajya-sabha',
+limit_dataset_pages = 7, limit_datasets = 10)
 }
 }
 \seealso{
