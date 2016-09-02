@@ -158,8 +158,8 @@ get_datasets_from_a_catalog <- function(catalog_link, limit_pages = 5L) {
 #' @seealso get_datasets_from_a_catalog
 search_for_datasets <- function(search_terms,
                                 limit_search_pages = 5L,
-                                return_catalog_list = FALSE,
                                 limit_catalogs = 5L,
+                                return_catalog_list = FALSE,
                                 limit_catalog_pages = 5L) {
   
   #TODO: Escaping of search terms
@@ -167,35 +167,50 @@ search_for_datasets <- function(search_terms,
     paste(collapse = ' ') %>%
     gsub(pattern = ' +', replacement = '+')
   
-  search_url <- mk_link(paste0('/catalogs?query=',
-                               search_terms_collapsed,
-                               '&sort_by=search_api_relevance',
-                               '&sort_order=DESC',
-                               '&items_per_page=9'))
+  relative_link <- paste0('/catalogs?query=',
+                          search_terms_collapsed,
+                          '&sort_by=search_api_relevance',
+                          '&sort_order=DESC',
+                          '&items_per_page=9')
   
-  first_search_result <- get_link(search_url)
+  search_result <- get_link(mk_link(relative_link))
   
-  next_pages_links <- first_search_result %>%
-    html_nodes(css = '.pager-item a') %>%
-    html_attr('href')
+  links_tried <- relative_link
   
-  next_pages_links <- next_pages_links[seq_along(next_pages_links) < limit_search_pages]
+  catalogs <- extract_catalogs_from_search_result(search_result)
   
-  next_pages_results <- lapply(next_pages_links, . %>% mk_link %>% get_link)
+  message('Found ', nrow(catalogs), ' catalogs till now')
   
-  catalogs_from_all_search_pages <- c(list(first_search_result), next_pages_results) %>% 
-    lapply(extract_catalogs_from_search_result) %>% 
-    do.call(what = rbind, args = .)
-  
-  if (return_catalog_list) {
-    catalogs_from_all_search_pages$link <- vapply(X = catalogs_from_all_search_pages$link,
-                                                  FUN = mk_link,
-                                                  FUN.VALUE = 'text',
-                                                  USE.NAMES = FALSE)
-    return(catalogs_from_all_search_pages) 
+  while ( (length(links_tried) < limit_search_pages) && 
+          (nrow(catalogs) < limit_catalogs) ) {
+    
+    next_pages_links <- search_result %>%
+      html_nodes(css = '.pager-item a') %>%
+      html_attr('href')
+    
+    next_pages_links <- setdiff(next_pages_links, links_tried)
+    
+    if (length(next_pages_links) < 1) break
+    
+    next_page_rel_link <- next_pages_links[1]
+    
+    search_result <- get_link(mk_link(next_page_rel_link))
+    
+    links_tried <- c(links_tried, next_page_rel_link)
+    
+    catalogs <- rbind(catalogs,
+                      extract_catalogs_from_search_result(search_result))
+    
+    message('Found ', nrow(catalogs), ' catalogs till now')
   }
   
-  catalogs_from_all_search_pages <- catalogs_from_all_search_pages[seq_len(nrow(catalogs_from_all_search_pages)) < limit_catalogs, , drop = FALSE]
+  if (return_catalog_list) {
+    catalogs$link <- vapply(X = catalogs$link,
+                            FUN = mk_link,
+                            FUN.VALUE = 'text',
+                            USE.NAMES = FALSE)
+    return(catalogs) 
+  }
   
   ans <- lapply(X = catalogs_from_all_search_pages$link,
                 FUN = . %>%
