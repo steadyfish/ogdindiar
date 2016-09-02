@@ -23,7 +23,6 @@ generator_of_get_link <- function(x, wait = 0.25) {
 
 get_link <- generator_of_get_link()
 
-
 fill_na_if_empty <- function(x) {
   if (length(x) != 0) return(x)
   x[NA]
@@ -100,7 +99,8 @@ extract_info_from_single_data_set <- function(single_data_set) {
 #' @title get data sets for a catalog
 #' @description Get the list of data sets and related info for a catalog
 #' @param catalog_link Link to the catalog
-#' @param limit_pages Limit the number of pages that the function should request. Each page contains a list of data sets.
+#' @param limit_dataset_pages Limit the number of pages that should be requested and parsed, to acquire the datasets. Default is 5. Set to Inf to request all.
+#' @param limit_datasets Request more pages until the number of datasets obtained reaches this limit. Default is 10. Set to Inf to request all.
 #' @importFrom magrittr %>%
 #' @importFrom xml2 read_html
 #' @importFrom rvest html_nodes html_text html_attr
@@ -108,26 +108,56 @@ extract_info_from_single_data_set <- function(single_data_set) {
 #' @examples
 #' \dontrun{
 #' get_datasets_from_a_catalog(
-#' 'https://data.gov.in/catalog/fishing-harbours-fisheries-statistics-2014',
-#' limit_pages = Inf)
+#' 'https://data.gov.in/catalog/session-wise-statistical-information-relating-questions-rajya-sabha',
+#' limit_dataset_pages = 7, limit_datasets = 10)
 #' }
 #' @seealso search_for_datasets
-get_datasets_from_a_catalog <- function(catalog_link, limit_pages = 5L) {
+get_datasets_from_a_catalog <- function(catalog_link, limit_dataset_pages = 5L, limit_datasets = 10L) {
   
-  this_catalog_result <- get_link(catalog_link)
+  if (length(catalog_link) != 1) stop('Only one catalog link must be specified!')
   
-  next_pages <- this_catalog_result %>% html_nodes(css = '.pager-item a') %>% html_attr('href')
+  links_tried <- character(0)
   
-  next_pages <- next_pages[seq_along(next_pages) < limit_pages]
+  datasets <- data.frame(name        = character(0),
+                         granularity = character(0),
+                         file_size   = character(0),
+                         downloads   = numeric(0),
+                         res_id      = character(0),
+                         ods         = character(0),
+                         xls         = character(0),
+                         json        = character(0),
+                         xml         = character(0),
+                         jsonp       = character(0))
   
-  next_page_results <- lapply(next_pages, . %>% mk_link %>% get_link)
+  this_link <- catalog_link
   
-  data_set_nodes <- c(list(this_catalog_result), next_page_results) %>%
-    lapply(. %>% html_nodes(css = '.views-row.ogpl-grid-list')) %>% 
-    unlist(recursive = FALSE, use.names = FALSE)
+  while ( (length(links_tried) < limit_dataset_pages) &&
+          (nrow(datasets)      < limit_datasets) ) {
+    
+    this_catalog_result <- get_link(this_link)
+    links_tried <- c(links_tried, this_link)
+    
+    data_set_nodes <- this_catalog_result %>%
+      html_nodes(css = '.views-row.ogpl-grid-list')
+    
+    this_datasets <- lapply(data_set_nodes, extract_info_from_single_data_set) %>% 
+      do.call(args = ., what = rbind)
+    
+    datasets <- rbind(datasets, this_datasets)
+    
+    message('Found ', nrow(datasets), ' datasets till now')
+    
+    next_pages <- this_catalog_result %>% html_nodes(css = '.pager-item a') %>% html_attr('href')
+    next_pages <- vapply(X = next_pages, FUN = mk_link, FUN.VALUE = 'temp', USE.NAMES = FALSE)
+    
+    next_pages <- setdiff(next_pages, links_tried)
+    
+    if (length(next_pages) < 1) break
+    
+    this_link <- next_pages[1]
+  }
   
-  lapply(data_set_nodes, extract_info_from_single_data_set) %>% 
-    do.call(args = ., what = rbind)
+  datasets
 }
 
 #' @title Search for data sets
