@@ -13,7 +13,10 @@ generator_of_get_link <- function(x, wait = 0.25) {
     
     #TODO: Add retry functionality here
     message('Requesting page ', x)
-    ans <- read_html(x)
+    tmpfilepath <- tempfile()
+    curl::curl_download(x, destfile = tmpfilepath)
+    ans <- read_html(tmpfilepath)
+    unlink(tmpfilepath)
     
     env_obj$last_url_accessed <- as.numeric(Sys.time())
     
