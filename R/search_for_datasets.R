@@ -74,13 +74,15 @@ extract_info_from_single_data_set <- function(single_data_set) {
     html_attr('href') %>% 
     fill_na_if_empty %>% 
     ifelse(is.na(.), yes = ., no = extract_resource_id(.))
-  
-  csv_link   <- single_data_set %>% html_nodes(css = '.data-extension') %>% html_attr('href')
-  ods_link   <- single_data_set %>% html_nodes(css = '.ods')            %>% html_attr('href')
-  xls_link   <- single_data_set %>% html_nodes(css = '.xls')            %>% html_attr('href')
-  json_link  <- single_data_set %>% html_nodes(css = '.json')           %>% html_attr('href')
-  xml_link   <- single_data_set %>% html_nodes(css = '.xml')            %>% html_attr('href')
-  jsonp_link <- single_data_set %>% html_nodes(css = '.jsonp')          %>% html_attr('href')
+
+  default_link <- single_data_set %>% html_nodes(css = '.data-extension') %>% html_attr('href') %>% na.omit 
+  csv_link     <- single_data_set %>% html_nodes(css = '.csv')            %>% html_attr('href') %>% na.omit
+  excel_link   <- single_data_set %>% html_nodes(css = '.excel')          %>% html_attr('href') %>% na.omit
+  ods_link     <- single_data_set %>% html_nodes(css = '.ods')            %>% html_attr('href') %>% na.omit
+  xls_link     <- single_data_set %>% html_nodes(css = '.xls')            %>% html_attr('href') %>% na.omit
+  json_link    <- single_data_set %>% html_nodes(css = '.json')           %>% html_attr('href') %>% na.omit
+  xml_link     <- single_data_set %>% html_nodes(css = '.xml')            %>% html_attr('href') %>% na.omit
+  jsonp_link   <- single_data_set %>% html_nodes(css = '.jsonp')          %>% html_attr('href') %>% na.omit
   
   reference_url <- single_data_set %>% html_nodes(css = '.ext') %>% html_attr('href')
   note <- single_data_set %>% html_nodes(css = '.ogpl-processed') %>% html_text
@@ -90,7 +92,9 @@ extract_info_from_single_data_set <- function(single_data_set) {
              file_size        = fill_na_if_empty(file_size),
              downloads        = fill_na_if_empty(download_count),
              res_id           = res_id,
+             default          = fill_na_if_empty(default_link),
              csv              = fill_na_if_empty(csv_link),
+             excel            = fill_na_if_empty(excel_link),
              ods              = fill_na_if_empty(ods_link),
              xls              = fill_na_if_empty(xls_link),
              json             = fill_na_if_empty(json_link),
