@@ -1,5 +1,6 @@
 mk_link <- . %>% paste0("https://data.gov.in", .)
 
+#' @importFrom curl curl_download
 generator_of_get_link <- function(x, wait = 0.25) {
   
   env_obj <- new.env(hash = FALSE, emptyenv())
@@ -14,7 +15,7 @@ generator_of_get_link <- function(x, wait = 0.25) {
     #TODO: Add retry functionality here
     message('Requesting page ', x)
     tmpfilepath <- tempfile()
-    curl::curl_download(x, destfile = tmpfilepath)
+    curl_download(x, destfile = tmpfilepath)
     ans <- read_html(tmpfilepath)
     unlink(tmpfilepath)
     
@@ -287,4 +288,38 @@ search_for_datasets <- function(search_terms,
   }
   
   datasets
+}
+
+#' @title Download dataset
+#' @description Given a download link, obtained by using either `search_for_datasets` or `get_datasets_from_a_catalog`, this function will download the file.
+#' @param urllink Download link/url
+#' @param filepath If specified, the file will be downloaded to the specified location. If unspecified, it will be saved in the tmp directory
+#' @importFrom magrittr %>%
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_children html_name html_text
+#' @importFrom stringr str_trim str_replace_all
+#' @importFrom curl curl_fetch_memory curl_download
+#' @importFrom tools file_ext
+#' @export
+download_dataset <- function(urllink, filepath = NULL) {
+  tmp <- curl_fetch_memory(url = urllink)
+  
+  first_page <- read_html(tmp$content) %>% html_children() 
+  
+  which_head <- which(html_name(first_page) == 'head')
+  
+  finalurl <- first_page[[which_head]] %>% 
+    html_children %>%
+    html_text %>%  
+    grep(pattern = 'window.location.href', value = TRUE) %>% 
+    str_trim %>% 
+    str_replace_all('.*"(.*)"$', '\\1')
+  
+  file_extension <- file_ext(finalurl)
+  
+  if (is.null(filepath)) filepath <- paste0(tempfile(), '.', file_extension)
+  
+  curl_download(url = finalurl, destfile = filepath)
+  
+  list(filepath = filepath, type = file_extension)
 }
