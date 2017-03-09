@@ -4,23 +4,25 @@
 \alias{search_for_datasets}
 \title{Search for data sets}
 \usage{
-search_for_datasets(search_terms, limit_search_pages = 5L,
-  return_catalog_list = FALSE, limit_catalogs = 5L,
-  limit_catalog_pages = 5L)
+search_for_datasets(search_terms, limit_catalog_pages = 5L,
+  limit_catalogs = 10L, return_catalog_list = FALSE,
+  limit_dataset_pages = 5L, limit_datasets = 10L)
 }
 \arguments{
 \item{search_terms}{Either one string with multiple words separated by space, or a character vector with all the search terms}
 
-\item{limit_search_pages}{Number of pages of search results to request. Default is 5. Make it Inf to get all.}
+\item{limit_catalog_pages}{Number of pages of search results to request. Default is 5. Set to Inf to get all.}
 
-\item{return_catalog_list}{Default is FALSE. If TRUE, the function return will not look for data sets, and will only return the list of catalogs found.}
+\item{limit_catalogs}{Number of catalogs that the function should parse to get the data sets. Default is 5. Set to Inf to get all.}
 
-\item{limit_catalogs}{Number of catalogs that the function should parse to get the data sets. Default is 5. Make it Inf to get all.}
+\item{return_catalog_list}{Default is FALSE. If TRUE, the function will not look for data sets, and will only return the list of catalogs found.}
 
-\item{limit_catalog_pages}{Number of pages to parse through, for each catalog. Default is 5. Make it Inf to get all.}
+\item{limit_dataset_pages}{Limit the number of pages that should be requested and parsed, to acquire the datasets. Default is 5. Set to Inf to request all.}
+
+\item{limit_datasets}{Request more pages until the number of datasets obtained reaches this limit. Default is 10. Set to Inf to request all.}
 }
 \description{
-This function scrapes the data.gov.in search results and returns all the information available for the datasets. As this function doesn't use API and just parses the web pages, there needs to delay between successive requests, and there should be limits to the number of pages that the function downloads from the web. For a particular search input, there may be multiple pages of search results. Each result page contains a list of catalogs. And each catalog contains multiple pages, with each page containing a list of data sets. There are default limits at each one of these stages. Make them 'Inf' if you need to get all the results or if you don't expect a large number of results.
+This function scrapes the data.gov.in search results and returns most of the information available for the datasets. As this function doesn't use API and just parses the web pages, there needs to delay between successive requests, and there should be limits to the number of pages that the function downloads from the web. For a particular search input, there may be multiple pages of search results. Each result page contains a list of catalogs. And each catalog contains multiple pages, with each page containing a list of data sets. There are default limits at each one of these stages. Make them 'Inf' if you need to get all the results or if you don't expect a large number of results. Please refer to vignette for a detailed overview.
 }
 \examples{
 \dontrun{
@@ -29,11 +31,11 @@ search_for_datasets('train usage')
 
 # Advanced Use, specifying additional parameters
 search_for_datasets(search_terms = c('state', 'gdp'),
-                    limit_search_pages = 1,
+                    limit_catalog_pages = 1,
                     limit_catalogs = 3,
-                    limit_catalog_pages = 2)
+                    limit_dataset_pages = 2)
 search_for_datasets(search_terms = c('state', 'gdp'),
-                    limit_search_pages = 2,
+                    limit_catalog_pages = 2,
                     return_catalog_list = TRUE)
 }
 }

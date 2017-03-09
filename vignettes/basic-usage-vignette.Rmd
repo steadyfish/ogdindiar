@@ -2,7 +2,10 @@
 title: "Introduction"
 author: "Dhrumin Shah"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 vignette: >
   %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}

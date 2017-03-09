@@ -1,0 +1,108 @@
+---
+title: "Search functionality"
+author: "Sainath Adapa"
+date: "`r Sys.Date()`"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+vignette: >
+  %\VignetteIndexEntry{Search functionality}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+## Introduction
+A typical search for datasets in the [Open Government Data Platform - India](https://data.gov.in) may proceed as follows. The person has a topic in mind, he enters the keywords for that topic in the search field, and clicks search. This will result in a list of catalogs related to the topic searched. The user then proceeds to click a few catalogs, and looks for the relavant datasets. Once he finds a dataset, he then will download the dataset, imports it into R, and starts the analysis.
+  
+The search functionality in this package is intended to help users by enabling the user to search for datasets directly from R. Once a particular dataset has been identified, the user can download the dataset using the `fetch_data` function if the dataset has API access. If the dataset doesn't have API access, then the user can choose among the numerous utilies that are available in the R ecosystem to download and import data.
+  
+## Web flow
+As data.gov.in doesn't have an API endpoint to search for datasets (yet), this package uses web scraping to achieve this result. There are a number of pages and steps that a user goes through before he reaches the dataset page. It is important to know this process, to understand the various parameters of the search functionality.
+  
+### Step 1 : Catalog results
+This is the result page for the search term "train usage".
+  
+![](catalogs.png)
+ 
+As can be seen from the image, the results page contains a grid of boxes. Each box represents a catalog (or a set) of datasets. Datasets from a particular catalog generally have a common theme. Also, notice the right hand bottom corner of the page, which shows that there are more catalogs in the next page.
+  
+So, TLDR there can be multiple search pages, and each search page contains many catalogs.
+
+### Step 2 : Datasets from a particular catalog
+The following image shows the datasets from the 'Train Engine Usage' catalog. (The second catalog from the left in the previous image)
+  
+![](datasets.png)
+
+Similar to the search results page, there can be multiple pages, and each page contains multiple datasets
+
+## `search_for_datasets`
+`search_for_datasets` function takes a search term(s), parses through the search pages and then catalogs, to return a data.frame with information about the datasets.
+  
+```{r echo=FALSE,message=FALSE,results='hide'}
+library(knitr)
+library(ogdindiar)
+```
+
+```{r message=FALSE,eval=FALSE,echo=TRUE}
+search_for_datasets('train usage')
+```
+
+```{r message=FALSE,eval=TRUE,echo=FALSE}
+str(search_for_datasets('train usage'))
+```
+
+This function contains five parameters in addition to the search term. These are
+
+1. `limit_catalog_pages`
+2. `limit_catalogs`
+3. `limit_dataset_pages`
+4. `limit_datasets`
+5. `return_catalog_list`
+
+The first two parameters refer to the Step 1, as explained in the previous section. `limit_catalog_pages` limits the number of pages that the function will go through to get the list of catalogs. `limit_catalogs` limits the total number of catalogs parsed. These two knobs can be used independently or in combination with each other. For example, set `limit_catalog_pages` to `Inf`, and `limit_catalogs` to 25, to get 25 catalogs irrespective of the number of pages it takes to get that many catalogs.
+
+The next two parameters refer to the Step 2. `limit_dataset_pages` limits the number of pages of datasets that the function will parse for a particular catalog. The function will stop irrespective of the remaining catalogs and pages of datasets, once the `limit_datasets` value has been reached.
+
+```{r message=FALSE,eval=FALSE,echo=TRUE}
+search_for_datasets(search_terms = c('state', 'gdp'),
+                    limit_catalog_pages = 1,
+                    limit_catalogs = 3,
+                    limit_dataset_pages = 2)
+```
+
+```{r message=FALSE,eval=TRUE,echo=FALSE}
+str(search_for_datasets(search_terms = c('state', 'gdp'),
+                        limit_catalog_pages = 1,
+                        limit_catalogs = 3,
+                        limit_dataset_pages = 2))
+```
+
+The last parameter `return_catalog_list` will enable the user to use this function to get only the list of catalogs. User can then use his judgement to choose few catalogs and then run `get_datasets_from_a_catalog` function on those catalogs to obtain the datasets.
+
+```{r message=FALSE,eval=FALSE,echo=TRUE}
+search_for_datasets(search_terms = c('state', 'gdp'),
+                    limit_catalog_pages = 2,
+                    return_catalog_list = TRUE)
+```
+
+```{r message=FALSE,eval=TRUE,echo=FALSE}
+str(search_for_datasets(search_terms = c('state', 'gdp'),
+                        limit_catalog_pages = 2,
+                        return_catalog_list = TRUE))
+```
+
+## `get_datasets_from_a_catalog`
+Use this function to get the list of datasets from a particular catalog.
+
+```{r message=FALSE,eval=FALSE,echo=TRUE}
+get_datasets_from_a_catalog(
+  'https://data.gov.in/catalog/session-wise-statistical-information-relating-questions-rajya-sabha',
+  limit_dataset_pages = 7, limit_datasets = 10)
+```
+
+```{r message=FALSE,eval=TRUE,echo=FALSE}
+str(get_datasets_from_a_catalog(
+  'https://data.gov.in/catalog/session-wise-statistical-information-relating-questions-rajya-sabha',
+  limit_dataset_pages = 7, limit_datasets = 10))
+```
