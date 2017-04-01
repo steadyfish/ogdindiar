@@ -12,7 +12,7 @@
 #' @export
 get_field_names <- function(x){
   #x: list
-  names(x[[4]])
+  names(x$fields)
 }
 
 #' Get count of elements that were returned from JSON data query
@@ -29,7 +29,7 @@ get_field_names <- function(x){
 #' @export
 get_count <- function(x){
   #x: list
-  x[[3]]
+  x$count
 }
 
 #' Get field/variable types from the JSON data object
@@ -45,7 +45,7 @@ get_count <- function(x){
 #' }
 #' @export
 get_field_type<-function(x){
-  x[[4]]
+  x$fields
 }  
 
 #' Get data from the JSON data object 
@@ -61,5 +61,5 @@ get_field_type<-function(x){
 #' }
 #' @export
 get_data <- function(x){
-  x[[5]]
+  x$records
 }
