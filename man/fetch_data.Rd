@@ -4,8 +4,14 @@
 \alias{fetch_data}
 \title{Load data from the Government of India API.}
 \usage{
-fetch_data(res_id, filter = NULL, select = NULL, sort = NULL,
-  field_type_correction = TRUE, max_obs = 500)
+fetch_data(
+  res_id,
+  filter = NULL,
+  select = NULL,
+  sort = NULL,
+  field_type_correction = TRUE,
+  max_obs = 500
+)
 }
 \arguments{
 \item{res_id}{a string, JSON data resource id}
@@ -40,4 +46,3 @@ fetch_data(res_id = "60a68cec-7d1a-4e0e-a7eb-73ee1c7f29b7"
 }
 }
 \keyword{Name}
-

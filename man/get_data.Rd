@@ -22,4 +22,3 @@ get_data(x = JSON_doc)
 }
 }
 \keyword{Name}
-

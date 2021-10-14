@@ -22,4 +22,3 @@ to_data_frame(x = get_data(JSON_list))
 }
 }
 \keyword{Name}
-

@@ -3,7 +3,6 @@
 \docType{package}
 \name{ogdindiar}
 \alias{ogdindiar}
-\alias{ogdindiar-package}
 \title{ogdindiar: Provides API access to selected datasets on Open Government Data - India Portal.}
 \description{
 The ogdindiar package provides three categories of important functions:

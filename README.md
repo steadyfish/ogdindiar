@@ -1,5 +1,12 @@
-ogdindiar
-========
+# ogdindiar <a href='https://ropengov.github.io/ogdindiar'><img src='man/figures/logo.png' align="right" height="139" /></a>
+
+<!-- badges: start -->
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
+[![R build
+status](https://github.com/rOpenGov/ogdindiar/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/ogdindiar/actions)
+<!-- badges: end -->
+
+
 
 R Package to access [Open Government Data from India](https://data.gov.in).
 
@@ -12,7 +19,7 @@ This package provides easy access to the API provided by [Open Government Data P
 * To use this package to download data from [Open Government Data Platform - India](https://data.gov.in), you'll first need to signup on the portal and obtain an API key. (API key is a 32 characters long hexadecimal string).
 * You can either set it as a temporary global variable or a permanent global variable.
   1. **Temporary variable approach:** when you make your first API call you'll be asked to provide this API key. 
-  2. **Permanent variable approach:** You can permanently store this key in your `.Renviron` file as `OGDINDIA_API_KEY` (preferred). For more info see `?ogdindia_api_key`. You can also refer to ["Appendix: API key best practices" for httr package on cran](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html) for an example on how to set a global variable in `.Renviron` file.
+  2. **Permanent variable approach:** You can permanently store this key in your `.Renviron` file as `OGDINDIA_API_KEY` (preferred). For more info see `?ogdindia_api_key`. You can also refer to ["Appendix: API key best practices" for httr package on cran](https://httr.r-lib.org/articles/api-packages.html) for an example on how to set a global variable in `.Renviron` file.
 
 ## Installation
 

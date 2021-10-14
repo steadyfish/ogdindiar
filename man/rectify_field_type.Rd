@@ -24,4 +24,3 @@ rectify_field_type(data_stage2, data_field_type)
 }
 \keyword{Internal,}
 \keyword{rectify}
-

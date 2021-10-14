@@ -22,4 +22,3 @@ get_field_names(x = JSON_doc)
 }
 }
 \keyword{Name}
-

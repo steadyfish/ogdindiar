@@ -22,4 +22,3 @@ get_count(x = JSON_doc)
 }
 }
 \keyword{Name}
-

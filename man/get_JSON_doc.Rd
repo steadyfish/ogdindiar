@@ -4,8 +4,16 @@
 \alias{get_JSON_doc}
 \title{Get JSON data for requested data resource}
 \usage{
-get_JSON_doc(link = "https://data.gov.in/api/datastore/resource.json?",
-  res_id, offset, no_elements, filter, select, sort, verbose = FALSE)
+get_JSON_doc(
+  link = "https://data.gov.in/api/datastore/resource.json?",
+  res_id,
+  offset,
+  no_elements,
+  filter,
+  select,
+  sort,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{link}{a string, general JSON data link}
@@ -42,4 +50,3 @@ JSON_doc = get_JSON_doc(link="http://data.gov.in/api/datastore/resource.json?",
 }
 }
 \keyword{Name}
-

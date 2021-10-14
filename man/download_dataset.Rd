@@ -14,4 +14,3 @@ download_dataset(urllink, filepath = NULL)
 \description{
 Given a download link, obtained by using either `search_for_datasets` or `get_datasets_from_a_catalog`, this function will download the file.
 }
-

@@ -1,5 +1,6 @@
 mk_link <- . %>% paste0("https://data.gov.in", .)
 
+#' @importFrom stats na.omit
 #' @importFrom curl curl_download
 generator_of_get_link <- function(x, wait = 0.25) {
   

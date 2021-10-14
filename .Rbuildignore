@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^pkgdown$
+^_pkgdown\.yml$
+^\.github$
+^\._pkgdown\.yml$
+^vignettes/basic-usage-vignette\.Rmd\.orig$
+^vignettes/search-functionality\.Rmd\.orig$

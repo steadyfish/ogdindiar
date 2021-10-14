@@ -4,9 +4,14 @@
 \alias{search_for_datasets}
 \title{Search for data sets}
 \usage{
-search_for_datasets(search_terms, limit_catalog_pages = 5L,
-  limit_catalogs = 10L, return_catalog_list = FALSE,
-  limit_dataset_pages = 5L, limit_datasets = 10L)
+search_for_datasets(
+  search_terms,
+  limit_catalog_pages = 5L,
+  limit_catalogs = 10L,
+  return_catalog_list = FALSE,
+  limit_dataset_pages = 5L,
+  limit_datasets = 10L
+)
 }
 \arguments{
 \item{search_terms}{Either one string with multiple words separated by space, or a character vector with all the search terms}
@@ -42,4 +47,3 @@ search_for_datasets(search_terms = c('state', 'gdp'),
 \seealso{
 get_datasets_from_a_catalog
 }
-

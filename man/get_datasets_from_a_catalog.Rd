@@ -4,8 +4,11 @@
 \alias{get_datasets_from_a_catalog}
 \title{get data sets for a catalog}
 \usage{
-get_datasets_from_a_catalog(catalog_link, limit_dataset_pages = 5L,
-  limit_datasets = 10L)
+get_datasets_from_a_catalog(
+  catalog_link,
+  limit_dataset_pages = 5L,
+  limit_datasets = 10L
+)
 }
 \arguments{
 \item{catalog_link}{Link to the catalog}
@@ -27,4 +30,3 @@ limit_dataset_pages = 7, limit_datasets = 10)
 \seealso{
 search_for_datasets
 }
-
